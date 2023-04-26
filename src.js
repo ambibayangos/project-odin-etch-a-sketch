@@ -9,10 +9,33 @@ function createGrid(gridSize){
                 let colElement = document.createElement('div');
                 colElement.setAttribute('id', `row${row}-col${col}`);
                 colElement.classList.add('col');
+                colElement.addEventListener('mousedown',temp);
+
                 rowElement.append(colElement);
             }
             gridBoxElement.append(rowElement);
         }
 }
 
+
+function temp(){
+    console.log(this);
+    this.setAttribute('style', 'background-color: black');
+}
+
 createGrid(10);
+
+
+/*
+const gridItems = document.querySelectorAll('.col');
+console.log(gridItems);
+
+
+gridItems.forEach(item  => {
+    addEventListener('mousedown', () =>{
+        console.log(item);
+        //item.setAttribute('style', 'background-color: black');
+    
+    });
+});
+*/
