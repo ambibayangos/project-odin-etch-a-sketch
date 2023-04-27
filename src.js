@@ -1,5 +1,5 @@
 let drawFlag = 0;
-const drawingBoardPixelSize = 500;
+const drawingBoardPixelSize = 700;
 
 const gridBoxElement = document.querySelector('.grid-box');
 
@@ -40,10 +40,9 @@ function enableDrawFlag(){
 }
 
 
-const button = document.querySelector('.select-grid-button');
-button.addEventListener('click', () =>{
+const createGridButtonElement = document.querySelector('.select-grid-button');
+createGridButtonElement.addEventListener('click', () =>{
     let gridSize = prompt('Enter the grid size!');
-    console.log(gridSize);
     const gridItems = document.querySelectorAll('.col');
     gridItems.forEach(item => {
         item.remove();
@@ -51,6 +50,16 @@ button.addEventListener('click', () =>{
 
     createGrid(+gridSize);
 });
+
+
+const clearGridButtonElement = document.querySelector('.clear-grid-button');
+clearGridButtonElement.addEventListener('click', () =>{
+    const gridItems = document.querySelectorAll('.col');
+    gridItems.forEach(item =>{
+        item.style.backgroundColor  = "white";
+    });
+});
+
 
 createGrid(5);
 
