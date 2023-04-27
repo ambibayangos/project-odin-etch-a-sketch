@@ -1,4 +1,5 @@
 let drawFlag = 0;
+const drawingBoardPixelSize = 500;
 
 const gridBoxElement = document.querySelector('.grid-box');
 
@@ -11,10 +12,12 @@ function createGrid(gridSize){
                 let colElement = document.createElement('div');
                 colElement.setAttribute('id', `row${row}-col${col}`);
                 colElement.classList.add('col');
+                colElement.setAttribute('style', 
+                `height:${drawingBoardPixelSize/gridSize}px;
+                 width:${drawingBoardPixelSize/gridSize}px;`);
                 colElement.addEventListener('mousedown',enableDrawFlag);
                 colElement.addEventListener('mouseup',disableDrawFlag);
                 colElement.addEventListener('mouseover',setElementBackgroundColor);
-
                 rowElement.append(colElement);
             }
             gridBoxElement.append(rowElement);
@@ -23,9 +26,8 @@ function createGrid(gridSize){
 
 
 function setElementBackgroundColor(){
-    console.log(this);
     if(drawFlag){
-        this.setAttribute('style', 'background-color: black');
+        this.style.backgroundColor  = "black";
     }
 }
 
@@ -38,4 +40,17 @@ function enableDrawFlag(){
 }
 
 
-createGrid(20);
+const button = document.querySelector('.select-grid-button');
+button.addEventListener('click', () =>{
+    let gridSize = prompt('Enter the grid size!');
+    console.log(gridSize);
+    const gridItems = document.querySelectorAll('.col');
+    gridItems.forEach(item => {
+        item.remove();
+    });
+
+    createGrid(+gridSize);
+});
+
+createGrid(5);
+
