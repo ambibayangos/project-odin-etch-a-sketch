@@ -1,3 +1,5 @@
+let drawFlag = 0;
+
 const gridBoxElement = document.querySelector('.grid-box');
 
 function createGrid(gridSize){
@@ -9,7 +11,9 @@ function createGrid(gridSize){
                 let colElement = document.createElement('div');
                 colElement.setAttribute('id', `row${row}-col${col}`);
                 colElement.classList.add('col');
-                colElement.addEventListener('mousedown',temp);
+                colElement.addEventListener('mousedown',enableDrawFlag);
+                colElement.addEventListener('mouseup',disableDrawFlag);
+                colElement.addEventListener('mouseover',setElementBackgroundColor);
 
                 rowElement.append(colElement);
             }
@@ -18,24 +22,20 @@ function createGrid(gridSize){
 }
 
 
-function temp(){
+function setElementBackgroundColor(){
     console.log(this);
-    this.setAttribute('style', 'background-color: black');
+    if(drawFlag){
+        this.setAttribute('style', 'background-color: black');
+    }
 }
 
-createGrid(10);
+function disableDrawFlag(){
+    drawFlag = 0;
+}
+
+function enableDrawFlag(){
+    drawFlag = 1;
+}
 
 
-/*
-const gridItems = document.querySelectorAll('.col');
-console.log(gridItems);
-
-
-gridItems.forEach(item  => {
-    addEventListener('mousedown', () =>{
-        console.log(item);
-        //item.setAttribute('style', 'background-color: black');
-    
-    });
-});
-*/
+createGrid(20);
