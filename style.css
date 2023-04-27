@@ -4,6 +4,18 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin: 8;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+.title{
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.grid-box{
+    margin: 32px;
 }
 
 .row{
@@ -15,3 +27,12 @@ body{
     border: 1px solid black;
     box-sizing: border-box;
 }
+
+.controls{
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    gap: 8px;
+}
+
+
