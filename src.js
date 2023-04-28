@@ -62,6 +62,11 @@ function enableDrawFlag(){
 const createGridButtonElement = document.querySelector('.select-grid-button');
 createGridButtonElement.addEventListener('click', () =>{
     let gridSize = prompt('Enter the grid size!');
+    
+    if(!gridSize || +gridSize > 100){
+        gridSize = 2;
+    }
+
     const colItems = document.querySelectorAll('.col');
     colItems.forEach(col =>{
         col.remove();
