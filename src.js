@@ -1,3 +1,14 @@
+/*
+
+***********************************************
+1. There is a bug when changing the grid size
+2. Implement color mode.
+3. Fix bug when the mouse is held down.
+************************************************
+
+
+*/
+
 let drawFlag = 0;
 const drawingBoardPixelSize = 600;
 
@@ -26,9 +37,17 @@ function createGrid(gridSize){
 
 
 function setElementBackgroundColor(){
-    if(drawFlag){
-        this.style.backgroundColor  = "black";
+    let gridItemBackgroundColor = this.style.backgroundColor;
+    if(gridItemBackgroundColor === ''){
+        // set back ground color to anything
+        if(drawFlag){
+            this.style.backgroundColor  = "black";
+        }
+    }else{
+        // increase RGB value until its completely black
     }
+
+   
 }
 
 function disableDrawFlag(){
@@ -43,14 +62,15 @@ function enableDrawFlag(){
 const createGridButtonElement = document.querySelector('.select-grid-button');
 createGridButtonElement.addEventListener('click', () =>{
     let gridSize = prompt('Enter the grid size!');
-    if(!gridSize || +gridSize > 100 || typeof gridSize !== 'number'){
-        gridSize = 100;
-    }
-    const gridItems = document.querySelectorAll('.col');
-    gridItems.forEach(item => {
-        item.remove();
+    const colItems = document.querySelectorAll('.col');
+    colItems.forEach(col =>{
+        col.remove();
     });
 
+    const rowItems = document.querySelectorAll('.row');
+    rowItems.forEach(row =>{
+        row.remove();
+    });
     createGrid(+gridSize);
 });
 
