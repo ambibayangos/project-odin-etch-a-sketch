@@ -10,6 +10,7 @@
 */
 
 let drawFlag = 0;
+let colorMode = 0;
 const drawingBoardPixelSize = 600;
 
 const gridBoxElement = document.querySelector('.grid-box');
@@ -38,14 +39,17 @@ function createGrid(gridSize){
 
 function setElementBackgroundColor(){
     if(drawFlag){
+        
+        if(!colorMode){
+            this.style.backgroundColor = `rgb(${0},${0},${0})`;
+            return;
+        }
+        
         let elementRGB = getElementRGBValue(this);
         RValue = +elementRGB[0];
         GValue = +elementRGB[1];
         BValue = +elementRGB[2];
-
-        console.log(`r${RValue},g${GValue},b${BValue}`);
         let elementBackgroundIsWhite = RValue === 255 && GValue === 255 && BValue === 255;
-        console.log(elementBackgroundIsWhite);
         if(elementBackgroundIsWhite){
             let randomRGB = generateRandomRBGValue();
             this.style.backgroundColor = `rgb(${randomRGB[0]},${randomRGB[1]},${randomRGB[2]})`;
@@ -111,6 +115,18 @@ clearGridButtonElement.addEventListener('click', () =>{
     });
 });
 
+const colorModeButtonElement = document.querySelector('.chande-mode-button');
+colorModeButtonElement.addEventListener('click', () =>{
+
+    if(colorMode){
+        colorMode = 0;
+
+        colorModeButtonElement.textContent = 'Color mode';
+    }else{
+        colorMode = 1;
+        colorModeButtonElement.textContent = 'Black and white mode';
+    }
+});
 
 createGrid(5);
 
