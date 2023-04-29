@@ -1,14 +1,3 @@
-/*
-
-***********************************************
-1. There is a bug when changing the grid size
-2. Implement color mode.
-3. Fix bug when the mouse is held down.
-************************************************
-
-
-*/
-
 let drawFlag = 0;
 let colorMode = 0;
 const drawingBoardPixelSize = 600;
@@ -35,7 +24,6 @@ function createGrid(gridSize){
             gridBoxElement.append(rowElement);
         }
 }
-
 
 function setElementBackgroundColor(){
     if(drawFlag){
