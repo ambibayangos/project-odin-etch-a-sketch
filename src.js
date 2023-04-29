@@ -29,7 +29,7 @@ function createGrid(gridSize){
                  width:${drawingBoardPixelSize/gridSize}px;`);
                 colElement.addEventListener('mousedown',enableDrawFlag);
                 colElement.addEventListener('mouseup',disableDrawFlag);
-                colElement.addEventListener('mouseover',setElementBackgroundColor);
+                colElement.addEventListener('mousemove',setElementBackgroundColor);
                 rowElement.append(colElement);
             }
             gridBoxElement.append(rowElement);
@@ -117,23 +117,21 @@ clearGridButtonElement.addEventListener('click', () =>{
 
 const colorModeButtonElement = document.querySelector('.chande-mode-button');
 colorModeButtonElement.addEventListener('click', () =>{
-
+const currentModeElement = document.querySelector('.current-mode-display');
     if(colorMode){
         colorMode = 0;
-        colorModeButtonElement.textContent = 'Color mode';
+        colorModeButtonElement.textContent = 'Swich to color mode';
         colorModeButtonElement.classList.remove('chande-mode-button-black');
         colorModeButtonElement.classList.add('chande-mode-button');
+        currentModeElement.textContent = 'Currently in black and white mode';
 
     }else{
         colorMode = 1;
-        colorModeButtonElement.textContent = 'Black and white mode';
+        colorModeButtonElement.textContent = 'Switch to black and white mode';
         colorModeButtonElement.classList.add('chande-mode-button-black');
         colorModeButtonElement.classList.remove('chande-mode-button');
+        currentModeElement.textContent = 'Currently in color mode';
     }
 });
 
 createGrid(5);
-
-// if the color is white then make a random color
-// else increase the RBG values by 10% each pass
-// then after 10 pass the RBG should be black.
