@@ -120,11 +120,15 @@ colorModeButtonElement.addEventListener('click', () =>{
 
     if(colorMode){
         colorMode = 0;
-
         colorModeButtonElement.textContent = 'Color mode';
+        colorModeButtonElement.classList.remove('chande-mode-button-black');
+        colorModeButtonElement.classList.add('chande-mode-button');
+
     }else{
         colorMode = 1;
         colorModeButtonElement.textContent = 'Black and white mode';
+        colorModeButtonElement.classList.add('chande-mode-button-black');
+        colorModeButtonElement.classList.remove('chande-mode-button');
     }
 });
 
