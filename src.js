@@ -37,43 +37,24 @@ function createGrid(gridSize){
 
 
 function setElementBackgroundColor(){
-    //let gridItemBackgroundColor = this.style.backgroundColor;
     if(drawFlag){
 
-    let elementRGB = getElementRGBValue(this);
-    RValue = +elementRGB[0];
-    GValue = +elementRGB[1];
-    BValue = +elementRGB[2];
-    let elementBackgroundIsWhite = RValue === 0 && GValue === 0 && BValue === 0 ? true : false;
+        let elementRGB = getElementRGBValue(this);
+        console.log(elementRGB);
+        RValue = +elementRGB[0];
+        GValue = +elementRGB[1];
+        BValue = +elementRGB[2];
+        let elementBackgroundIsWhite = RValue === 0 && GValue === 0 && BValue === 0 ? true : false;
 
-    if(elementBackgroundIsWhite){
-        this.style.backgroundColor = 'black';
-        console.log(generateRandomRBGValue());
-    }else{
-        let randomRGB = generateRandomRBGValue();
-        this.style.backgroundColor = `rgb(${randomRGB[0]},${randomRGB[1]},${randomRGB[2]})`;
-    }
-
-        /*
-        
-        if(gridItemBackgroundColor == ''){
-
-
-            
-            // this should make random rgb here
-            //this.style.backgroundColor  = "black";
-            let randomValue = Math.round(Math.random()*65535);
-            this.style.backgroundColor  = `#${randomValue}`;
-            //this.style.backgroundColor = 'black'
-        
+        if(elementBackgroundIsWhite){
+            let randomRGB = generateRandomRBGValue();
+            this.style.backgroundColor = `rgb(${randomRGB[0]},${randomRGB[1]},${randomRGB[2]})`;
         }else{
-
-            let a = getComputedStyle(this);
-            //this.style.backgroundColor  = `grey`;
-            getElementRGBValue(this);
-           
+            RValue =  elementRGB[0] - 25 <= 0 ? 0 : elementRGB[0] - 25;
+            GValue =  elementRGB[1] - 25 <= 0 ? 0 : elementRGB[1] - 25;
+            BValue =  elementRGB[2] - 25 <= 0 ? 0 : elementRGB[2] - 25;
+            this.style.backgroundColor = `rgb(${RValue},${GValue},${BValue})`;
         }
-        */
         
     }
    
@@ -89,9 +70,10 @@ function generateRandomRBGValue(){
 
 function getElementRGBValue(element){
     let rawRGB  = window.getComputedStyle(element).backgroundColor;
-    let slicedRGB = rawRGB.slice(5); // remove the prefix rgb from rbg(r,g,b,?)
-    let individualRGBArray = slicedRGB.split(',',3); // get idividual rbg and remove the 4th value
-    return individualRGBArray;
+    let reg = /[0-9]+, [0-9]+, [0-9]+/;
+    let processedRGB = reg.exec(rawRGB);
+    let rgbArray = processedRGB[0].split(',');
+    return rgbArray;
 }
 
 function disableDrawFlag(){
