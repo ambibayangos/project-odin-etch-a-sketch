@@ -37,17 +37,61 @@ function createGrid(gridSize){
 
 
 function setElementBackgroundColor(){
-    let gridItemBackgroundColor = this.style.backgroundColor;
-    if(gridItemBackgroundColor === ''){
-        // set back ground color to anything
-        if(drawFlag){
-            this.style.backgroundColor  = "black";
-        }
+    //let gridItemBackgroundColor = this.style.backgroundColor;
+    if(drawFlag){
+
+    let elementRGB = getElementRGBValue(this);
+    RValue = +elementRGB[0];
+    GValue = +elementRGB[1];
+    BValue = +elementRGB[2];
+    let elementBackgroundIsWhite = RValue === 0 && GValue === 0 && BValue === 0 ? true : false;
+
+    if(elementBackgroundIsWhite){
+        this.style.backgroundColor = 'black';
+        console.log(generateRandomRBGValue());
     }else{
-        // increase RGB value until its completely black
+        let randomRGB = generateRandomRBGValue();
+        this.style.backgroundColor = `rgb(${randomRGB[0]},${randomRGB[1]},${randomRGB[2]})`;
     }
 
+        /*
+        
+        if(gridItemBackgroundColor == ''){
+
+
+            
+            // this should make random rgb here
+            //this.style.backgroundColor  = "black";
+            let randomValue = Math.round(Math.random()*65535);
+            this.style.backgroundColor  = `#${randomValue}`;
+            //this.style.backgroundColor = 'black'
+        
+        }else{
+
+            let a = getComputedStyle(this);
+            //this.style.backgroundColor  = `grey`;
+            getElementRGBValue(this);
+           
+        }
+        */
+        
+    }
    
+}
+
+function generateRandomRBGValue(){
+    let R = Math.round(Math.random()*255);
+    let G = Math.round(Math.random()*255);
+    let B = Math.round(Math.random()*255);
+
+    return [R,G,B];
+}
+
+function getElementRGBValue(element){
+    let rawRGB  = window.getComputedStyle(element).backgroundColor;
+    let slicedRGB = rawRGB.slice(5); // remove the prefix rgb from rbg(r,g,b,?)
+    let individualRGBArray = slicedRGB.split(',',3); // get idividual rbg and remove the 4th value
+    return individualRGBArray;
 }
 
 function disableDrawFlag(){
@@ -91,3 +135,6 @@ clearGridButtonElement.addEventListener('click', () =>{
 
 createGrid(5);
 
+// if the color is white then make a random color
+// else increase the RBG values by 10% each pass
+// then after 10 pass the RBG should be black.
