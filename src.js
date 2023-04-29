@@ -38,33 +38,30 @@ function createGrid(gridSize){
 
 function setElementBackgroundColor(){
     if(drawFlag){
-
         let elementRGB = getElementRGBValue(this);
-        console.log(elementRGB);
         RValue = +elementRGB[0];
         GValue = +elementRGB[1];
         BValue = +elementRGB[2];
-        let elementBackgroundIsWhite = RValue === 0 && GValue === 0 && BValue === 0 ? true : false;
 
+        console.log(`r${RValue},g${GValue},b${BValue}`);
+        let elementBackgroundIsWhite = RValue === 255 && GValue === 255 && BValue === 255;
+        console.log(elementBackgroundIsWhite);
         if(elementBackgroundIsWhite){
             let randomRGB = generateRandomRBGValue();
             this.style.backgroundColor = `rgb(${randomRGB[0]},${randomRGB[1]},${randomRGB[2]})`;
         }else{
-            RValue =  elementRGB[0] - 25 <= 0 ? 0 : elementRGB[0] - 25;
-            GValue =  elementRGB[1] - 25 <= 0 ? 0 : elementRGB[1] - 25;
-            BValue =  elementRGB[2] - 25 <= 0 ? 0 : elementRGB[2] - 25;
+            RValue =  (+elementRGB[0] - 25) <= 0 ? 0 : +elementRGB[0] - 25;
+            GValue =  (+elementRGB[1] - 25) <= 0 ? 0 : +elementRGB[1] - 25;
+            BValue =  (+elementRGB[2] - 25) <= 0 ? 0 : +elementRGB[2] - 25;
             this.style.backgroundColor = `rgb(${RValue},${GValue},${BValue})`;
         }
-        
     }
-   
 }
 
 function generateRandomRBGValue(){
     let R = Math.round(Math.random()*255);
     let G = Math.round(Math.random()*255);
     let B = Math.round(Math.random()*255);
-
     return [R,G,B];
 }
 
