@@ -18,7 +18,7 @@ function createGrid(gridSize){
                  width:${drawingBoardPixelSize/gridSize}px;`);
                 colElement.addEventListener('mousedown',enableDrawFlag);
                 colElement.addEventListener('mouseup',disableDrawFlag);
-                colElement.addEventListener('mousemove',setElementBackgroundColor);
+                colElement.addEventListener('mouseover',setElementBackgroundColor);
                 rowElement.append(colElement);
             }
             gridBoxElement.append(rowElement);
@@ -72,7 +72,6 @@ function disableDrawFlag(){
 function enableDrawFlag(){
     drawFlag = 1;
 }
-
 
 const createGridButtonElement = document.querySelector('.select-grid-button');
 createGridButtonElement.addEventListener('click', () =>{
